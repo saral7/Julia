@@ -1,0 +1,32 @@
+- u Julia "terminalu" stisnes "?" pa ti se stvori help pa upises funkciju koja te zanima
+- ctrl+enter - runna trenutnu liniju samo (moras runnat sve prije toga koje utjecu na nju da se spreme promjene)
+- stvari izmedu parova ## = cell 
+- runnas cell s alt+enter
+- print ("$ime") -> ispisuje vrijednost varijable ime
+- typeof(var) -> tip podatka varijable var
+- 1.5e-2 = 1.5*10^(-2)
+- poseban tip podatka za racionalne brojeve - c = a//b (skrati ga); numerator i denominator
+- ans = zadnji odgovor pohranjen
+- true+true = 2 :)
+- global kao u pythonu, ali izbjegavaj
+- komentiraj i opisuj s ##
+- 2^4
+- nije jednako: !==
+- ==: je li jednako
+- ===: je li jednako, ali nesto enforcea (??)
+-  function nesto()
+      return
+   end
+- mozes i npr.: kvadrat(x) = x*x ili kvadrat = x -> x*x
+- mozes staviti neke argumente u funkciji da imaju defaultnu vrijednost ako se ne postavi, npr. tezine(masa, g = 9.81) pa pozvat tezine(60)
+- korak u for petlji ide u srednji argument -> i:start:korak:kraj 
+
+- Paketi:
+   //VAZNO: instaliraj paket plots
+
+. mozes staviti x = 1:0.1:2*pi pa reci for i = x :)
+- ako stavis y = cos(x) -> moras staviti cos.(x) da se zna da se ide po (nizu!) x i za svaki racuna cos funkciju
+
+- PROUCI Plots kodove
+
+- VAZNO: davaj feedback npr. ova naredba je cool, ova je bzvz
