@@ -30,3 +30,13 @@
 - PROUCI Plots kodove
 
 - VAZNO: davaj feedback npr. ova naredba je cool, ova je bzvz
+
+OSNOVNI MODELI - NABOJ i ELEKTRICNO polje:
+- napravis si DOMENU (koor. sustav, mreza, grid, mesh) - na rubovima idu rubni uvjeti (??)
+   - vazno odabrati ne pregustu ne prerijetku
+
+- preporuka: prvo napisati konstante
+
+- paket distibutions za npr. normalnu razdiobu
+
+- PRO TIP: ! oznacava da se mozes nadogradit (npr. na prijasnji plot da ti ne prebrise sve)

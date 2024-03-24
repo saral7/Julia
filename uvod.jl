@@ -27,7 +27,7 @@ function nekaj(a, b=15; c, d=4)
    return a + b - c - d
 end
 
-println(nekaj(a=1, c=3))
+#println(nekaj(a=1, c=3))
 #println(nekaj(1, 3, 4, 2))
 
 ##
