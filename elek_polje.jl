@@ -37,12 +37,12 @@ Ey = k .* Q1 .* Ry./R
 # dodamo drugi naboj
 Rx = xG .- x2
 Ry = yG .- y2
-R = sqrt.(Rx.^2 + Ry.^2)
+R = sqrt.(Rx.^2 + Ry.^2).^3
 
 Ex += k .* Q2 .* Rx./R
 Ey += k .* Q2 .* Ry./R
 
-E = sqrt.(Ex.^2 + Ey.^2)
+E = sqrt.(Ex.^2 + Ey.^2).^3
 u = Ex./E
 v = Ey./E
 
