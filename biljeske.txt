@@ -40,3 +40,20 @@ OSNOVNI MODELI - NABOJ i ELEKTRICNO polje:
 - paket distibutions za npr. normalnu razdiobu
 
 - PRO TIP: ! oznacava da se mozes nadogradit (npr. na prijasnji plot da ti ne prebrise sve)
+         - kad imas neki range npr. t = 0:1:14 koristi .operatore npr. v = 3 .* t
+         - npr. zeros(0) = vektor duljine 0 koji mozes punit
+BUNGEE:
+- Fz = -c_d * v^2, v = brzina u smjeru pada, cd = koncentrirani koef. otpora zraka
+- dv/dt = g-c_d*v^2/m
+- v(t) = sqrt(gm/c_d)*tanh()
+
+DZ: napravi ak mislis da treba nekaj drugacije, sto kada ne pratis na smjer otpora zraka, da dobijes i pogresku
+
+GRESKE:
+- modeliranja - pri formulaciji modela, prejednostavan...
+- implementacije - u kodu
+- ulaznih podataka - kriva interpretacija, ne prate formu koju moramo parsirat npr.
+- preciznosti - zaokruzivanje, decimale
+- u numerickim metodama - konacno/beskonacno, diskretno/kontinuirano
+
+VAZNO: 13.5. rok za DZ sve
