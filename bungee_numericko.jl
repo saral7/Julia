@@ -70,24 +70,24 @@ function brzina2(v0, dt, tp, tk)
 
 end
 
-v_kon, brzine, vrijeme, put = brzina2(0, 2, 0, 14)
+v_kon, brzine, vrijeme, put = brzina2(0, 0.5, 0, 14)
 
 
 
 using Plots 
-display(plot(vrijeme, brzine, label = "Brzina u vremenu - numericki"))
-display(plot(vrijeme, put, label = "Put u vremenu"))
-
-
-# u analitickom
-include("bungee_analiticko.jl") 
+plot(vrijeme, brzine, label = "Brzina u vremenu - numericki")
+#plot!(vrijeme, put, label = "Put u vremenu")
 
 # racun funkcije brzine - iz dobivenog diferencijanog rjesenja
 v = sqrt(g*m/c_d) .* tanh.(sqrt.(g*c_d/m) .* t)
 
-using Plots
 plot!(t, v, label = "Brzina u vremenu - analiticki")
 plot!(xlab = "t [s]", ylab = "v [m/s]")
+
+# racun pogreske - DZ
+pogreska = abs.(brzine .- v)
+
+plot!(vrijeme, pogreska, label = "Pogreska")
 
 # racun terminalne brzine
 v_term = sqrt(g*m/c_d) .* tanh.(sqrt.(g*c_d/m) .* Inf)
