@@ -10,7 +10,7 @@ global t = 0:0.5:14
 global g = 9.81
 
 function dv_dt(v_i) 
-   # return g-c_d*v_i^2/m
+   #return g-c_d*v_i^2/m
    return g - c_d*v_i*abs(v_i)/m # cooler jer je uvijek suprotno od smjera brzine, a ne negativno
 end
 
@@ -76,7 +76,9 @@ v_kon, brzine, vrijeme, put = brzina2(0, 0.5, 0, 14)
 
 using Plots 
 plot(vrijeme, brzine, label = "Brzina u vremenu - numericki")
-#plot!(vrijeme, put, label = "Put u vremenu")
+
+# DZ - racun prijedenog puta, stavila sam da bude apsolutna vrijednost, ljepse se ostali rezultati vide kada se makne
+plot!(vrijeme, abs.(put), label = "Put u vremenu")
 
 # racun funkcije brzine - iz dobivenog diferencijanog rjesenja
 v = sqrt(g*m/c_d) .* tanh.(sqrt.(g*c_d/m) .* t)
@@ -84,8 +86,9 @@ v = sqrt(g*m/c_d) .* tanh.(sqrt.(g*c_d/m) .* t)
 plot!(t, v, label = "Brzina u vremenu - analiticki")
 plot!(xlab = "t [s]", ylab = "v [m/s]")
 
-# racun pogreske - DZ
+# DZ - racun i prikaz relativne pogreske
 pogreska_rel = abs.(v .- brzine)./v * 100.0
+show(pogreska_rel)
 plot!(vrijeme, pogreska_rel, label = "Relativna pogreska")
 
 # racun terminalne brzine
@@ -94,6 +97,5 @@ v_term = v_term .* ones(length(t))  # asimptota kojoj brzina tezi
 
 plot!(t, v_term, label = "Terminalna brzina")
 
-## DZ: napravi ak mislis da treba nekaj drugacije, sto kada ne pratis na smjer otpora zraka, da dobijes i pogresku
 
 

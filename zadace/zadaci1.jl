@@ -2,10 +2,9 @@
 x = y = 1
 x
 y
-##
-# 15 = a, ne moze se
-##
 
+
+## funkcija
 function volumen(a, objekt)
    if (objekt == "sfera")
       return (4/3)*pi*a^3

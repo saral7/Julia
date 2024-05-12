@@ -47,7 +47,6 @@ BUNGEE:
 - dv/dt = g-c_d*v^2/m
 - v(t) = sqrt(gm/c_d)*tanh()
 
-DZ: napravi ak mislis da treba nekaj drugacije, sto kada ne pratis na smjer otpora zraka, da dobijes i pogresku
 
 GRESKE:
 - modeliranja - pri formulaciji modela, prejednostavan...
@@ -56,4 +55,61 @@ GRESKE:
 - preciznosti - zaokruzivanje, decimale
 - u numerickim metodama - konacno/beskonacno, diskretno/kontinuirano
 
-VAZNO: 13.5. rok za DZ sve
+- ODE = ordinary differential equation (1 neovisna varijabla)
+- Eulerova metoda = iterativno po koracima (bungee_numericko)
+- problem = ODEProblem(f, u0, tspan, p) => sol = solve(problem)
+            - f = funkcija
+            - u0 = pocetni uvjeti
+            - tspan = vremenski interval
+            - p = tuple parametara
+- f (du, u, p, t) => du je kaj deriviras po vremenu (?)
+
+- link: https://docs.sciml.ai/DiffEqDocs/stable/getting_started/
+
+MODELI RASTA:
+- logisticki rast = curr_pop*alfa + curr_pop^2*beta 
+         // alfa = max stopa rodenih (max brzina rasta), beta = stopa umrlih
+         => new_pop = curr_pop + stopa_rasta
+- OPCENITO: dpop/dt = stopa_rasta => rijesi diferencijalnu 
+
+- paket DataFrames = jako cool, napravi ti tablicu
+- paket CSV = cita .csv datoteke
+
+- nrow() = broj redaka, mozes koristiti za zadnji redak onda
+
+GRABEZLJIVAC-PLIJEN
+- Lotka-Volterra: proucava odnosno dvije vrste
+- 
+- x = broj plijena, y = broj grabezljivca
+- a = stopa rasta plijena kad nema grabezljivca, b = efikasnost stete grabezljivca plijenu
+- c = stopa mortaliteta grabezljivaca, d = stopa rasta grabezljivaca u interakciji s plijenom
+- dx/dt = x(a-b*y) 
+- dy/dt = -y(c-d*x)
+
+- RM dodaci:   a -> logisticki rast a(1-x/K)
+               modifikacija predacije = d -> d/(x+e), b -> b/(x+e) 
+- 
+
+- sol = solve(problem) // rjesenje ODE
+- plot!(sol, vars = (0, 2), label = "Grabezljivac") -> neka varijabla (y) ovisno o t
+- plot!(sol, vars = (1, 2), label = "Grabezljivac") -> neka varijabla (y) ovisno o drugoj (x)
+Parametri
+a = 2
+b = 3
+c = 0.5
+d = 0.61
+K = 100  # kapacitet okolisa, gornja granica za plijen
+e = 10 
+
+
+DZ: napravi ak mislis da treba nekaj drugacije, sto kada ne pratis na smjer otpora zraka, da dobijes i pogresku
+DZ: adrenalin junkie, maslinicki most, nadi konstantu elasticnosti...
+DZ: napravi svoj kod za rast (bez derivacija), projekcija do 2100. koristeci DE za sva tri rasta,
+   mijenjaj stope rasta i umrlih da sto blize dodes UN-ovoj
+
+DZ: imas dva grabezljivca za jedan plijen
+
+VAZNO: 3.6. upload projekta na Github, 4.6. je prezentacija
+VAZNO: dobro zakomentiraj
+
+VAZNO: 14.5. rok za DZ sve
