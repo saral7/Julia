@@ -176,3 +176,7 @@ tspan = (0, 25*7)
 problem = ODEProblem(SEIR, u0, tspan, p)
 sol = solve(problem)
 plot(sol, vars = (0, 2), label = "Zarazeni")
+
+
+# KOMENTAR: u posljednja tri nisam uspjela postici da dode do 10000 zarazenih u maksimumu
+# ali sam otprilike pogodila kada je maksimum i kada dospije do 0
