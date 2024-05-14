@@ -36,11 +36,11 @@ u0 = [50.0; 15.0; 10.0]   # za pocetni broj plijena, grabezljivaca1 i grabezljiv
 tspan = (0.0, 300.0)
 problem = ODEProblem(Rosenzweig_MacArthur, u0, tspan, p)
 sol = solve(problem)
-#plot(sol, vars = (0, 1), label = "Plijen")
-#plot!(sol, vars = (0, 2), label = "Grabezljivac 1")
-#plot!(sol, vars = (0, 3), label = "Grabezljivac 2")
-plot(xlab = "plijen", ylab = "grabezljivac")
-plot!(sol, vars = (1, 2), label = "Grabezljivac 1 u ovisnovsi o plijenu")
-plot!(sol, vars = (1, 3), label = "Grabezljivac 2 u ovisnovsi o plijenu")
+plot(sol, vars = (0, 1), label = "Plijen")
+plot!(sol, vars = (0, 2), label = "Grabezljivac 1")
+plot!(sol, vars = (0, 3), label = "Grabezljivac 2")
+#plot(xlab = "plijen", ylab = "grabezljivac")
+#plot!(sol, vars = (1, 2), label = "Grabezljivac 1 u ovisnovsi o plijenu")
+#plot!(sol, vars = (1, 3), label = "Grabezljivac 2 u ovisnovsi o plijenu")
 
 # DODATI KOMENTAR:
