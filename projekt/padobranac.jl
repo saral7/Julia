@@ -110,22 +110,23 @@ end
 # pocetne vrijednosti
 C = 0.82    # drag coefficient: modeliram covjeka kao long-cilinder: https://en.wikipedia.org/wiki/Drag_coefficient
 ro = 1.225  # gustoca zraka, https://en.wikipedia.org/wiki/Density_of_air
-m = 90      # masa covjeka sa svom opremom
+m = 75      # masa covjeka sa svom opremom
 g = 9.81
 A = 0.7     # povrsina tijela okomita na smjer brzine
 A_parachute = 30  # povrsina padobrana
-F_wind = 0
+F_wind = 15
 
 # poziv funkcije za optimiranje trenutaka otvaranja padobrana
 param = (C, ro, A, g, m, A_parachute, F_wind)
-t_wished = 250
+u0 = [0, 3000, 240, 0]     # pocetni uvjeti: v0 u y smjeru, pocetna visina, v0 u x smjeru, pocetni x-polozaj
+t_wished = 300
 t1, t2 = whenToOpenParachute(param, u0, t_wished)
 println("Za lijepo slijetanje najkasnije otvoriti padobran u ", t1, " sekundi,",
  "a za let duljine barem ", t_wished, " sekundi otvoriti padobran najkasnije u ", t2, " sekundi")
 
 
 
-t_parachute = 29   # trenutak od pocetka skoka otvaranja padobrana 
+t_parachute = 26   # trenutak od pocetka skoka otvaranja padobrana 
 tspan = (0, 400)
 p = (C, ro, A, g, m, t_parachute, A_parachute, F_wind)
 u0 = [0, 3000, 240, 0]
@@ -139,7 +140,7 @@ plot(sol, vars = (0, 2), label = "Visina tijekom vremena", xaxis = "vrijeme [s]"
 plot(sol, vars = (0, 3), label = "Brzina (x-smjer) tijekom vremena", xaxis = "vrijeme [s]", yaxis = "brzina [m/s]")
 plot(sol, vars = (0, 4), label = "Polozaj (x-smjer) tijekom vremena", xaxis = "vrijeme [s]", yaxis = "pomak [m]")
 
-plot(sol, vars = (2, 4), label = "Putanja", xaxis = "polozaj (x-smjer) [m]", yaxis = "visina [m]")
+plot(sol, vars = (4, 2), label = "Putanja", xaxis = "polozaj (x-smjer) [m]", yaxis = "visina [m]")
 
 rotation = @animate for i = 0:90
    plot(sol, vars = (4, 2, 0), label = "Prikaz svih vrijednosti", camera = (i, i), xaxis = "polozaj (x-smjer) [m]", yaxis = "visina [m]", zaxis = "vrijeme [s]")
