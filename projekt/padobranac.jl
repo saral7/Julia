@@ -3,6 +3,7 @@ using DifferentialEquations
 
 jump = function(du, u, p, t) 
    C, ro, A, g, m, t_parachute, A_parachute, F_wind = p
+   # u[1] = v_y, u[2] = y, u[3] = v_x, u[4] = x
 
    # provjeravam jesmo li blizu tlu
    if (u[2] < 1e-6)     # ako da, brzina pada na 0, polozaj (visina) se ne mijenja
@@ -39,7 +40,7 @@ function whenToOpenParachute(p, u0, time_wished)
    t_mid = 0
    tspan = (0, t_max)
    p2 = (C, ro, A, g, m, 1, A_parachute, F_wind)
-   epsilon = 2    # offset, za greske
+   epsilon = 0.5    # offset, za greske
    v_term = sqrt(2*m*g/(C*ro*A_parachute))      # vrijednost terminalne brzine s otvorenim padobranom
    
    # binarno pretrazivanje za zadnji trenutak otvaranja za pristojno slijetanje
@@ -63,7 +64,8 @@ function whenToOpenParachute(p, u0, time_wished)
       end
 
       if (abs(v_kon-v_term) > epsilon)
-         t_max = t_mid     # ako je prevelika brzina slijetanja, znaci da smo vec sletjeli prije nego sto smo otvorili padobran, treba ranije
+         t_max = t_mid     # ako je prevelika brzina slijetanja, znaci da smo vec sletjeli 
+                           # prije nego sto smo otvorili padobran, treba ranije
       else
          t_min = t_mid     # inace pokusajmo s kasnijim vremenom (povecaj lijevu granicu)
       end
@@ -113,34 +115,36 @@ ro = 1.225  # gustoca zraka, https://en.wikipedia.org/wiki/Density_of_air
 m = 75      # masa covjeka sa svom opremom
 g = 9.81
 A = 0.7     # povrsina tijela okomita na smjer brzine
-A_parachute = 30  # povrsina padobrana
+A_parachute = 30  # povrsina padobrana, https://www.skydivetecumseh.com/2022/11/30/skydiving-equipment-list/
 F_wind = 15
 
 # poziv funkcije za optimiranje trenutaka otvaranja padobrana
-param = (C, ro, A, g, m, A_parachute, F_wind)
-u0 = [0, 3000, 240, 0]     # pocetni uvjeti: v0 u y smjeru, pocetna visina, v0 u x smjeru, pocetni x-polozaj
-t_wished = 300
-t1, t2 = whenToOpenParachute(param, u0, t_wished)
-println("Za lijepo slijetanje najkasnije otvoriti padobran u ", t1, " sekundi,",
+param = (C, ro, A, g, m, A_parachute, F_wind) 
+u0 = [0, 3000, 44, 0]     # pocetni uvjeti: v0 u y smjeru, pocetna visina, v0 u x smjeru, pocetni x-polozaj 
+t_wished = 200 
+t1, t2 = whenToOpenParachute(param, u0, t_wished) 
+if t2 > 9998
+   println("Za lijepo slijetanje najkasnije otvoriti padobran u ", t1, " sekundi, ",
+ "a za let duljine barem ", t_wished, " sekundi otvoriti padobran bilo kada")
+else 
+   println("Za lijepo slijetanje najkasnije otvoriti padobran u ", t1, " sekundi, ",
  "a za let duljine barem ", t_wished, " sekundi otvoriti padobran najkasnije u ", t2, " sekundi")
+end
 
+t_parachute = 44   # trenutak od pocetka skoka otvaranja padobrana  
+tspan = (0, 100)  
+p = (C, ro, A, g, m, t_parachute, A_parachute, F_wind)  
+u0 = [0, 3000, 44, 0]  
 
-
-t_parachute = 26   # trenutak od pocetka skoka otvaranja padobrana 
-tspan = (0, 400)
-p = (C, ro, A, g, m, t_parachute, A_parachute, F_wind)
-u0 = [0, 3000, 240, 0]
-
-problem = ODEProblem(jump, u0, tspan, p)
-sol = solve(problem)
+problem = ODEProblem(jump, u0, tspan, p) 
+sol = solve(problem) 
 
 # plotovi, moze sluziti za provjeru rjesenja koje je dala pozvana funkcija whenToOpenParachute
-plot(sol, vars = (0, 1), label = "Brzina (y-smjer) tijekom vremena", xaxis = "vrijeme [s]", yaxis = "brzina [m/s]")
-plot(sol, vars = (0, 2), label = "Visina tijekom vremena", xaxis = "vrijeme [s]", yaxis = "visina [m]")
-plot(sol, vars = (0, 3), label = "Brzina (x-smjer) tijekom vremena", xaxis = "vrijeme [s]", yaxis = "brzina [m/s]")
-plot(sol, vars = (0, 4), label = "Polozaj (x-smjer) tijekom vremena", xaxis = "vrijeme [s]", yaxis = "pomak [m]")
-
-plot(sol, vars = (4, 2), label = "Putanja", xaxis = "polozaj (x-smjer) [m]", yaxis = "visina [m]")
+plot(sol, vars = (0, 1), label = "Brzina (y-smjer) tijekom vremena", xaxis = "vrijeme [s]", yaxis = "brzina [m/s]") 
+plot(sol, vars = (0, 2), label = "Visina tijekom vremena", xaxis = "vrijeme [s]", yaxis = "visina [m]") 
+plot(sol, vars = (0, 3), label = "Brzina (x-smjer) tijekom vremena", xaxis = "vrijeme [s]", yaxis = "brzina [m/s]") 
+plot(sol, vars = (0, 4), label = "Polozaj (x-smjer) tijekom vremena", xaxis = "vrijeme [s]", yaxis = "pomak [m]") 
+plot(sol, vars = (4, 2), label = "Putanja", xaxis = "polozaj (x-smjer) [m]", yaxis = "visina [m]") 
 
 rotation = @animate for i = 0:90
    plot(sol, vars = (4, 2, 0), label = "Prikaz svih vrijednosti", camera = (i, i), xaxis = "polozaj (x-smjer) [m]", yaxis = "visina [m]", zaxis = "vrijeme [s]")
