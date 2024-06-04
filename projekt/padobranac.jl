@@ -26,6 +26,8 @@ jump = function(du, u, p, t)
    
 end
 
+
+
 # funkcija koja vraca par (t1, t2) 
 # t1 = najkasniji trenutak da se otvori padobran, a da se i dalje sleti terminalnom brzinom s otvorenim padobranom
 # t2 = kada otvoriti padobran, a da se leti barem time_wished sekundi
