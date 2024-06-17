@@ -1,3 +1,5 @@
+## prije svega - bok!
+
 ## 1
 x = y = 1
 x
